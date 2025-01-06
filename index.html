@@ -9,7 +9,7 @@
   <style>
     :root {
       --font-primary: 'Courier New', Courier, monospace;
-      --font-title: 'Arial',e Courier, monospace;
+      --font-title: 'Arial', Courier, monospace;
       --font-size-title: 9rem; /* Truly HUGE title */
       --font-size-subtitle: 3rem;
       --font-size-base: 2rem;
@@ -90,13 +90,11 @@
       font-size: var(--font-size-explainer);
     }
 
-
     /* Links */
     a:link, a:visited {
       color: var(--color-link);
       text-decoration: none;
     }
-
     a:hover, a:active {
       color: var(--color-link);
       text-decoration: underline;
@@ -115,22 +113,12 @@
       object-fit: cover;
     }
 
-
     /* Footer */
     footer {
       text-align: center;
       padding: var(--spacing-medium) 0;
       font-size: 0.875rem;
-      color: #aaaaaa;https://www.google.com/search?client=ubuntu-sn&hs=6
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      :root {
-        --font-size-title: 2rem;
-        --font-size-subtitle: 1.5rem;
-        --font-size-explainer: 1rem; /* Adjusted font size for smaller screens */
-      }
+      color: #aaaaaa;
     }
 
     /* Minimalistic 4x4 Gallery Styles */
@@ -142,7 +130,6 @@
       max-width: var(--max-width-section);
       margin: var(--spacing-medium) auto;
     }
-
     .gallery img {
       width: 100%;
       cursor: pointer;
@@ -163,7 +150,6 @@
       align-items: center;
       z-index: 9999;
     }
-
     #overlay-img {
       width: 80%;
       max-width: 1000px;
@@ -204,15 +190,64 @@
     #next {
       right: 50px;
     }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      :root {
+        --font-size-title: 2rem;
+        --font-size-subtitle: 1.5rem;
+        --font-size-explainer: 1rem;
+      }
+
+      /* Explainer Text: 95% width, left-aligned */
+      .explainer {
+        width: 95%;
+        margin: var(--spacing-medium) auto;
+        text-align: left;
+      }
+
+      /* e.png image: normally 40% width, but 95% on mobile */
+      .explainer img {
+        width: 95% !important;
+        height: auto;
+      }
+
+      /* Video: 95% width */
+      .video-container {
+        width: 95%;
+        max-width: 95%;
+      }
+
+      /* Adjust the gallery overlay so it opens exactly where the user is
+         and positions <, > beneath the image, no X on mobile */
+      #close {
+        display: none; /* hide the X on mobile */
+      }
+      .nav-button {
+        position: static;
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 4rem;
+      }
+      #overlay {
+        align-items: flex-start; /* Start from where user is, so top is at scroll position */
+        padding-top: 2rem;
+      }
+      #overlay-img {
+        width: 95%;
+        margin: 0 auto;
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Header Section -->
   <header>
-<img src="l.png" alt="logo" style="width: 5vw;">
-<img src="l.png" alt="logo" style="width: 5vw;">
-<img src="l.png" alt="logo" style="width: 5vw;">
+    <img src="l.png" alt="logo" style="width: 5vw;">
+    <img src="l.png" alt="logo" style="width: 5vw;">
+    <img src="l.png" alt="logo" style="width: 5vw;">
     <h1 class="title">FRACTAL LOVE</h1>
     <div class="divider"></div>
     <h2 class="subtitle">INTERACTIVE LIGHT ART</h2>
@@ -227,35 +262,31 @@
       allowfullscreen
       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
     </iframe>
-
   </section>
-
 
   <!-- Explainer Text Section -->
   <section class="explainer">
     <p style="text-align: center;">*</p>
     <br><br><br>
 
-
-  <p>
-FRACTAL LOVE is an immersive, interactive light art installation driven by video-feedback. A camera observes its own output, creating a feedback loop that generates beautiful, dynamic, geometric patterns.
-<br><br>
-FRACTAL LOVE is highly interactive. Visitors can step into the stream of light between camera and projection, merging their bodies into a psychedelic shadow play.
-<br><br>
-A 3-axis robot navigates the fractal space by moving the camera. The patterns appearing in FRACTAL LOVE are not pre-programmed or algorithmically created; they emerge entirely from the feedback loop, shaped by camera angle, ambient light and participation.
+    <p>
+      FRACTAL LOVE is an immersive, interactive light art installation driven by video-feedback. A camera observes its own output, creating a feedback loop that generates beautiful, dynamic, geometric patterns.
+      <br><br>
+      FRACTAL LOVE is highly interactive. Visitors can step into the stream of light between camera and projection, merging their bodies into a psychedelic shadow play.
+      <br><br>
+      A 3-axis robot navigates the fractal space by moving the camera. The patterns appearing in FRACTAL LOVE are not pre-programmed or algorithmically created; they emerge entirely from the feedback loop, shaped by camera angle, ambient light and participation.
     </p>
     <br><br><br><br>
 
     <p style="text-align: center;">*</p>
     <br>
     <p style="text-align: center;">
-    <img src="e.png" alt="email">
+      <img src="e.png" alt="email" style="width: 40%;">
     </p>
     <br>
     <p style="text-align: center;">*</p>
-<br><br>
+    <br><br>
   </section>
-
 
   <!-- New 4x4 Gallery Section -->
   <section class="gallery">
@@ -304,6 +335,8 @@ A 3-axis robot navigates the fractal space by moving the camera. The patterns ap
       currentIndex = index;
       overlayImg.src = thumbnails[currentIndex].src;
       overlay.style.display = 'flex';
+      // Scroll to top of overlay if needed
+      overlay.scrollIntoView();
     }
 
     thumbnails.forEach((thumb, i) => {
