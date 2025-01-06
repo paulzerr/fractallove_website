@@ -9,14 +9,14 @@
   <style>
     :root {
       --font-primary: 'Courier New', Courier, monospace;
-      --font-title: 'Helvetica Neue', Arial, sans-serif;
-      --font-size-title: 6rem; /* Truly HUGE title */
-      --font-size-subtitle: 2rem;
-      --font-size-base: 1.5rem;
-      --font-size-explainer: 2.5rem; /* Much bigger explainer text */
+      --font-title: 'Courier New', Courier, monospace;
+      --font-size-title: 9rem; /* Truly HUGE title */
+      --font-size-subtitle: 3rem;
+      --font-size-base: 2rem;
+      --font-size-explainer: 2rem; /* Much bigger explainer text */
       --color-bg: #000000; /* Black background */
       --color-text: #f0f0f0; /* Off-white text */
-      --color-accent: #9c27b0; /* Accent color for subtitle */
+      --color-accent: #0000bb; /* Accent color for subtitle */
       --color-link: #4CAF50; /* Green links */
       --spacing-small: 1rem;
       --spacing-medium: 2rem;
@@ -96,24 +96,7 @@
       font-size: var(--font-size-explainer);
     }
 
-    /* Contact Info */
-    .contact {
-      max-width: var(--max-width-section);
-      width: 100%;
-      margin: var(--spacing-medium) auto;
-      padding: 0 var(--spacing-small);
-    }
-
-    .contact h3 {
-      margin-bottom: var(--spacing-small);
-    }
-
-    .contact a {
-      color: var(--color-link);
-      text-decoration: none;
-    }
-
-    .contact a:hover {
+    .explainer a:hover {
       text-decoration: underline;
     }
 
@@ -166,31 +149,30 @@
   </header>
 
   <!-- Embedded Video Section -->
-  <section class="video-container">
-    <!-- Replace with your video link or embed code -->
-    <iframe
-      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      title="FRACTAL LOVE Video"
-      allowfullscreen>
-    </iframe>
-  </section>
+<section class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 80%; max-width: 80%; margin: 0 auto; background-color: black;">
+  <iframe
+    src="https://player.vimeo.com/video/1044336532?autoplay=0&loop=0&dnt=1&title=0&byline=0&portrait=0"
+    frameborder="0"
+    allow="fullscreen; picture-in-picture"
+    allowfullscreen
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+  </iframe>
+</section>
+
+
+
 
   <!-- Explainer Text Section -->
   <section class="explainer">
     <p>
-      This interactive installation combines video feedback loops, fractal generation, and real-time visitor engagement.
-      Visitors become part of an ever-evolving visual tapestry, with their movements captured and reintegrated into
-      the fractal patterns projected on the gallery walls.
+FRACTAL LOVE is an interactive light art installation based on video-feedback. A camera observes its own output, creating a feedback loop that results in beautiful, dynamic, geometric patterns. FRACTAL LOVE is highly interactive. Visitors can step between the camera and projection to become part of the fractal in a sort of psychedelic shadow-play. A 3-axis robot moves the camera to alter the appearing images. The patterns appearing in FRACTAL LOVE are not pre-programmed or algorithmically created. They arise entirely through the feedback loop, and depend on camera angle, light conditions and interaction.
     </p>
-  </section>
 
-  <!-- Contact Information Section -->
-  <section class="contact">
-    <h3>Contact Info</h3>
+    <br><br>
+
+    <p>Contact:</p>
     <p>
-      For inquiries, please email us at
       <a href="mailto:info@fractallove.com">info@fractallove.com</a>
-      or call (555) 123-4567.
     </p>
   </section>
 
@@ -199,12 +181,11 @@
     <img src="image1.jpg" alt="Fractal Love Installation Shot 1">
     <img src="image2.jpg" alt="Fractal Love Installation Shot 2">
     <img src="image3.jpg" alt="Fractal Love Installation Shot 3">
-    <!-- Add as many images as you like, ensuring they are optimized for web. -->
+
   </section>
 
-  <!-- Footer Section -->
   <footer>
-    &copy; 2025 FRACTAL LOVE. All rights reserved.
+    &copy; 2024-2025 Paul Zerr. All rights reserved.
   </footer>
 
 </body>
