@@ -68,7 +68,7 @@
       justify-content: center;
     }
 
-    /* Explainer Section (merging text + images) */
+    /* Explainer Section */
     .explainer {
       max-width: var(--max-width-section);
       width: 70%;
@@ -94,28 +94,7 @@
       text-decoration: underline;
     }
 
-    /* Images Section */
-    .images {
-      max-width: var(--max-width-section);
-      width: 100%;
-      margin: var(--spacing-medium) auto;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: var(--spacing-small);
-      padding: 0 var(--spacing-small);
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: var(--spacing-medium) 0;
-      font-size: 0.875rem;
-      color: #aaaaaa;
-    }
-
-    /* Minimalistic 4x4 Gallery Styles */
+    /* 4x4 Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -137,52 +116,67 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh; /* corrected from the stray "1000px" */
+      height: 100vh;
       background-color: rgba(0, 0, 0, 0.8);
       display: none;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
       z-index: 9999;
+      overflow-y: auto; /* allows scrolling if image is tall */
+      padding-top: 2rem;
     }
-    #overlay-img {
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 100%;
       width: 100%;
+    }
+
+    /* Close button appears top-right, but not pinned absolutely */
+    #close {
+      align-self: flex-end;
+      font-size: 4rem;
+      margin: 0 2rem 1rem 0;
+      color: #fff;
+      cursor: pointer;
+      background: transparent;
+      user-select: none;
+    }
+
+    #overlay-img {
+      width: 100vw; /* image takes the full viewport width */
       max-width: 100%;
       height: auto;
       display: block;
-      z-index: 2;
+      margin: 0 auto;
     }
 
-    /* Close Button (X) */
-    #close {
-      position: absolute;
-      top: 40px;
-      right: 50px;
-      font-size: 8rem;
-      color: #fff;
-      cursor: pointer;
-      background: transparent;
-      z-index: 3;
-      user-select: none;
+    .nav-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
     }
-
-    /* Nav Buttons (< and >) */
     .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 8rem;
+      font-size: 4rem;
       color: #fff;
-      background: transparent;
       cursor: pointer;
-      z-index: 3;
+      background: transparent;
       user-select: none;
-      padding: 0 10px;
+      margin: 0 1.5rem;
     }
-    #prev {
-      left: 50px;
-    }
-    #next {
-      right: 50px;
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: var(--spacing-medium) 0;
+      font-size: 0.875rem;
+      color: #aaaaaa;
     }
 
     /* Responsive Adjustments */
@@ -193,12 +187,10 @@
         --font-size-explainer: 1rem;
       }
 
-      /* Header image at full width on mobile */
       header img {
         width: 100vw;
       }
 
-      /* Explainer Section + images at 100% on mobile */
       .explainer {
         width: 95%;
         margin: var(--spacing-medium) auto;
@@ -208,31 +200,25 @@
         width: 100% !important;
       }
 
-      /* Video: 95% width on mobile */
       .video-container {
         width: 95%;
         max-width: 95%;
       }
 
-      /* Adjust the gallery overlay so it opens from top */
+      /* Overlay adjustments for mobile */
+      #overlay {
+        padding-top: 1rem;
+      }
       #close {
-        display: none; /* hide the X on mobile */
+        font-size: 3rem;
+        margin: 0 1rem 1rem 0;
       }
       .nav-button {
-        position: static;
-        display: block;
-        text-align: center;
-        margin-top: 1rem;
-        font-size: 4rem;
-      }
-      #overlay {
-        align-items: flex-start;
-        padding-top: 2rem;
+        font-size: 3rem;
+        margin: 0 1rem;
       }
       #overlay-img {
         width: 95%;
-        margin: 0 auto;
-        display: block;
       }
     }
   </style>
@@ -241,7 +227,6 @@
   <!-- Header Section -->
   <header>
     <img src="title2.png" alt="logo">
-    <!-- Title/subtitle removed in favor of the image -->
   </header>
 
   <!-- Embedded Video Section -->
@@ -293,10 +278,14 @@
 
   <!-- Overlay for the 4x4 Gallery -->
   <div id="overlay">
-    <span id="close">X</span>
-    <span id="prev" class="nav-button">&lt;</span>
-    <span id="next" class="nav-button">&gt;</span>
-    <img id="overlay-img" src="" alt="Overlay Image">
+    <div class="overlay-content">
+      <span id="close">X</span>
+      <img id="overlay-img" src="" alt="Overlay Image">
+      <div class="nav-container">
+        <span id="prev" class="nav-button">&lt;</span>
+        <span id="next" class="nav-button">&gt;</span>
+      </div>
+    </div>
   </div>
 
   <!-- Additional Info Section -->
@@ -345,12 +334,15 @@
       overlay.style.display = 'none';
     });
 
+    // Close if clicking the background of the overlay
     overlay.addEventListener('click', (e) => {
+      // If the user clicks the overlay (not the overlay-content or the img), close
       if (e.target === overlay) {
         overlay.style.display = 'none';
       }
     });
 
+    // Navigation
     prevBtn.addEventListener('click', () => {
       currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
       showImage(currentIndex);
