@@ -10,14 +10,14 @@
     :root {
       --font-primary: 'Courier New', Courier, monospace;
       --font-title: 'Arial', Courier, monospace;
-      --font-size-title: 9rem; /* Truly HUGE title */
+      --font-size-title: 9rem; /* truly HUGE title if needed */
       --font-size-subtitle: 3rem;
       --font-size-base: 2rem;
-      --font-size-explainer: 2rem; /* Much bigger explainer text */
-      --color-bg: #000000; /* Black background */
-      --color-text: #f0f0f0; /* Off-white text */
-      --color-accent: #f0f0f0   ; /* Accent color for subtitle */
-      --color-link: #4CAF50; /* Green links */
+      --font-size-explainer: 2rem; /* bigger explainer text */
+      --color-bg: #000000;         /* black background */
+      --color-text: #f0f0f0;       /* off-white text */
+      --color-accent: #f0f0f0;     /* accent color if needed */
+      --color-link: #4CAF50;       /* green links */
       --spacing-small: 1rem;
       --spacing-medium: 2rem;
       --spacing-large: 4rem;
@@ -45,30 +45,18 @@
       align-items: center;
     }
 
+    /* Header */
     header {
       text-align: center;
       padding: var(--spacing-large) var(--spacing-small) var(--spacing-small);
     }
 
-    header .title {
-      font-family: var(--font-title);
-      font-size: var(--font-size-title);
-      font-weight: normal;
-      margin-bottom: var(--spacing-small);
-    }
-
-    header .subtitle {
-      font-size: var(--font-size-subtitle);
-      color: var(--color-accent);
-      margin-top: var(--spacing-small);
-    }
-
-    header .divider {
-      width: 100%;
-      max-width: var(--max-width-section);
-      height: 2px;
-      background-color: var(--color-text);
-      margin: var(--spacing-small) auto;
+    /* Main header image */
+    header img {
+      width: 70vw; /* desktop width for title image */
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     /* Video Section */
@@ -80,7 +68,7 @@
       justify-content: center;
     }
 
-    /* Explainer Text */
+    /* Explainer Section (merging text + images) */
     .explainer {
       max-width: var(--max-width-section);
       width: 70%;
@@ -88,6 +76,12 @@
       padding: 0 var(--spacing-small);
       text-align: justify;
       font-size: var(--font-size-explainer);
+    }
+    .explainer img {
+      display: block;
+      margin: var(--spacing-medium) auto;
+      width: 70%;
+      height: auto;
     }
 
     /* Links */
@@ -126,7 +120,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      width: 80%;
+      width: 95%;
       max-width: var(--max-width-section);
       margin: var(--spacing-medium) auto;
     }
@@ -143,7 +137,7 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: 100vh; /* corrected from the stray "1000px" */
       background-color: rgba(0, 0, 0, 0.8);
       display: none;
       justify-content: center;
@@ -151,8 +145,8 @@
       z-index: 9999;
     }
     #overlay-img {
-      width: 80%;
-      max-width: 1000px;
+      width: 100%;
+      max-width: 100%;
       height: auto;
       display: block;
       z-index: 2;
@@ -199,27 +193,28 @@
         --font-size-explainer: 1rem;
       }
 
-      /* Explainer Text: 95% width, left-aligned */
+      /* Header image at full width on mobile */
+      header img {
+        width: 100vw;
+      }
+
+      /* Explainer Section + images at 100% on mobile */
       .explainer {
         width: 95%;
         margin: var(--spacing-medium) auto;
         text-align: left;
       }
-
-      /* e.png image: normally 40% width, but 95% on mobile */
       .explainer img {
-        width: 95% !important;
-        height: auto;
+        width: 100% !important;
       }
 
-      /* Video: 95% width */
+      /* Video: 95% width on mobile */
       .video-container {
         width: 95%;
         max-width: 95%;
       }
 
-      /* Adjust the gallery overlay so it opens exactly where the user is
-         and positions <, > beneath the image, no X on mobile */
+      /* Adjust the gallery overlay so it opens from top */
       #close {
         display: none; /* hide the X on mobile */
       }
@@ -231,7 +226,7 @@
         font-size: 4rem;
       }
       #overlay {
-        align-items: flex-start; /* Start from where user is, so top is at scroll position */
+        align-items: flex-start;
         padding-top: 2rem;
       }
       #overlay-img {
@@ -245,17 +240,8 @@
 <body>
   <!-- Header Section -->
   <header>
-
-    <img src="title2.png" alt="logo" style="width: 70vw;">
-
-<!--
-    <div class="divider"></div>
-
-    <h2 class="subtitle">AN INTERACTIVE LIGHT ART INSTALLATION</h2>
-    <br><br><br>
-    <img src="l.png" alt="logo" style="width: 5vw;">
-    <img src="l.png" alt="logo" style="width: 5vw;">
-    <img src="l.png" alt="logo" style="width: 5vw;">-->
+    <img src="title2.png" alt="logo">
+    <!-- Title/subtitle removed in favor of the image -->
   </header>
 
   <!-- Embedded Video Section -->
@@ -271,8 +257,6 @@
 
   <!-- Explainer Text Section -->
   <section class="explainer">
-    <br>
-
     <p>
       FRACTAL LOVE is an immersive, interactive light art installation driven by video-feedback. A camera observes its own output, generating a feedback loop of beautiful, geometric patterns. A 3-axis camera robot navigates the fractal space.
       <br><br>
@@ -282,17 +266,16 @@
     </p>
     <br><br><br>
 
-<div style="text-align: center;">
-    <img src="l.png" alt="logo" style="width: 10%;">
-    <br><br><br>
-    <p style="margin: 0;">Contact and booking:</p>
-    <img src="e.png" alt="email" style="width: 40%;">
-    <br><br><br>
-</div>
-
+    <div style="text-align: center;">
+      <img src="l.png" alt="logo" style="width: 10%;">
+      <br><br><br>
+      <p style="margin: 0;">Contact and booking:</p>
+      <img src="e.png" alt="email" style="width: 70%;">
+      <br><br><br>
+    </div>
   </section>
 
-  <!-- New 4x4 Gallery Section -->
+  <!-- 4x4 Gallery Section -->
   <section class="gallery">
     <img src="images/image1.png" alt="Image 1">
     <img src="images/image2.png" alt="Image 2">
@@ -316,22 +299,19 @@
     <img id="overlay-img" src="" alt="Overlay Image">
   </div>
 
-
+  <!-- Additional Info Section -->
   <section class="explainer">
-  <br><br>
-  Previous appearances:
-  <br><br>
-  > Various private parties in 2023<br>
-  > NEBO Party (The Netherlands), June 2024<br>
-  > MoDem Festival (Croatia), August 2024<br>
-  > Synesthesia Festival (Portugal), September 2024<br>
-  <br><br><br><br><br>
-
-
+    <br><br>
+    Previous appearances:
+    <br><br>
+    &gt; Various private parties in 2023<br>
+    &gt; NEBO Party (The Netherlands), June 2024<br>
+    &gt; MoDem Festival (Croatia), August 2024<br>
+    &gt; Synesthesia Festival (Portugal), September 2024<br>
+    <br><br><br><br><br>
   </section>
 
-
-
+  <!-- Footer -->
   <footer>
     <br><br><br><br><br><br><br>
     &copy; 2024-2025 rainfern illuminated. All rights reserved.<br>
@@ -352,7 +332,6 @@
       currentIndex = index;
       overlayImg.src = thumbnails[currentIndex].src;
       overlay.style.display = 'flex';
-      // Scroll to top of overlay if needed
       overlay.scrollIntoView();
     }
 
@@ -366,14 +345,12 @@
       overlay.style.display = 'none';
     });
 
-    // Close if clicking outside the image (and not on the arrows or close button)
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.style.display = 'none';
       }
     });
 
-    // Navigation
     prevBtn.addEventListener('click', () => {
       currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
       showImage(currentIndex);
